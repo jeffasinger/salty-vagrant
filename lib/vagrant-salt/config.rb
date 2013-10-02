@@ -13,6 +13,7 @@ module VagrantPlugins
       attr_accessor :master_key
       attr_accessor :master_pub
       attr_accessor :run_highstate
+      attr_accessor :run_overstate
       attr_accessor :always_install
       attr_accessor :accept_keys
       attr_accessor :bootstrap_script
@@ -37,6 +38,7 @@ module VagrantPlugins
         @master_key = UNSET_VALUE
         @master_pub = UNSET_VALUE
         @run_highstate = UNSET_VALUE
+        @run_overstate = UNSET_VALUE
         @always_install = UNSET_VALUE
         @accept_keys = UNSET_VALUE
         @bootstrap_script = UNSET_VALUE

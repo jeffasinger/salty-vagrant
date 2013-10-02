@@ -68,6 +68,9 @@ Actions
 run_highstate    (true/false)
     Executes ``state.highstate`` on vagrant up
 
+run_overstar      (true/false)
+    Executes ``state.over`` on vagrant up
+
 accept_keys      (true/false)
     Accept all keys if running a master. DEPRECATED: use `seed_master`
 

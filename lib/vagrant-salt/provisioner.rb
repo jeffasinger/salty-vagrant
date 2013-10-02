@@ -18,6 +18,7 @@ module VagrantPlugins
         end
 
         call_highstate
+        call_overstate
       end
 
       def seed_master
@@ -294,7 +295,26 @@ module VagrantPlugins
           @machine.communicate.sudo("salt-key -A")
         end
       end
-  
+
+      def call_overstate
+        if @config.run_overstate
+            if @config.install_master
+              @machine.env.ui.info "Calling state.overstate... (this may take a while)"
+              @machine.communicate.sudo("salt '*' saltutil.sync_all")
+              @machine.communicate.sudo("salt-run state.over") do |type, data|
+                if @config.verbose
+                  @machine.env.ui.info(data)
+                end
+              end
+            else
+              @machine.env.ui.info "run_overstate does not make sense on a minion. Not running state.overstate."
+            end
+        else
+          @machine.env.ui.info "run_overstate set to false. Not running state.overstate."
+        end
+      end
+
+
       def call_highstate
         if @config.run_highstate
           @machine.env.ui.info "Calling state.highstate... (this may take a while)"
